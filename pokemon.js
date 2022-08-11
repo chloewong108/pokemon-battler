@@ -20,9 +20,80 @@ class Pokemon {
   takeDamage(num) {
     return (this.hitPoints -= num);
   }
-  useMove() {}
-  hasFainted() {}
+  useMove() {
+    const message = `${this.name} used ${this.move}! Damage dealt ${this.attackDamage}!`
+    console.log(message)
+    return this.attackDamage
+
+  }
+  hasFainted() {
+    if(this.hitPoints === 0){
+      return true
+    }
+    return false
+  }
 }
+
+class Fire extends Pokemon {
+  constructor(name, hitPoints, attackDamage, move){
+    super(name, hitPoints, attackDamage, move)
+    this.type = 'fire'
+  }
+  isEffectiveAgainst(rivalPokemon){
+    if(rivalPokemon.type === 'grass'){
+      return true
+    }
+    return false
+  }
+  isWeakTo(rivalPokemon){
+    if(rivalPokemon.type === 'water'){
+      return true
+    }
+    return false
+  }
+}
+
+class Grass extends Pokemon {
+  constructor(name, hitPoints, attackDamage, move){
+    super(name, hitPoints, attackDamage, move)
+    this.type = 'grass'
+  }
+  isEffectiveAgainst(rivalPokemon){
+    if(rivalPokemon.type === 'water'){
+      return true
+    }
+    return false
+  }
+  isWeakTo(rivalPokemon){
+    if(rivalPokemon.type === 'fire'){
+      return true
+    }
+    return false
+  }
+}
+
+class Water extends Pokemon {
+  constructor(name, hitPoints, attackDamage, move){
+    super(name, hitPoints, attackDamage, move)
+    this.type = 'water'
+  }
+  isEffectiveAgainst(rivalPokemon){
+    if(rivalPokemon.type === 'fire'){
+      return true
+    }
+    return false
+  }
+  isWeakTo(rivalPokemon){
+    if(rivalPokemon.type === 'grass'){
+      return true
+    }
+    return false
+  }
+}
+
+
+
+
 const effectiveAgainst = {
   fire: "grass",
   grass: "water",
@@ -36,7 +107,5 @@ const weakAgainst = {
 };
 
 const myPokemon = new Pokemon();
-const flareon = new Pokemon("flareon", "fire", 65, 20, "fire blast");
-const evee = new Pokemon("evee", "normal", 55, 18, "headbutt");
 
-module.exports = Pokemon;
+module.exports = {Pokemon, Fire, Grass, Water}
