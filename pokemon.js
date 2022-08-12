@@ -1,10 +1,10 @@
 class Pokemon {
-  constructor(name, type = "normal", hitPoints, attackDamage, move = "tackle") {
+  constructor(name, hitPoints, attackDamage, move = "tackle", type = "normal") {
     (this.name = name),
-      (this.type = type),
       (this.hitPoints = hitPoints),
       (this.attackDamage = attackDamage),
-      (this.move = move);
+      (this.move = move),
+      (this.type = type);
   }
   isEffectiveAgainst() {
     if (this.type === "normal") {
@@ -22,7 +22,6 @@ class Pokemon {
   }
   useMove() {
     const message = `${this.name} used ${this.move}! Damage dealt ${this.attackDamage}!`;
-    console.log(message);
     return this.attackDamage;
   }
   hasFainted() {
@@ -35,9 +34,7 @@ class Pokemon {
 
 class Fire extends Pokemon {
   constructor(name, hitPoints, attackDamage, move) {
-    console.log(name, hitPoints, attackDamage, move);
-    super(name, hitPoints, attackDamage, move);
-    this.type = "fire";
+    super(name, hitPoints, attackDamage, move, "fire");
   }
   isEffectiveAgainst(rivalPokemon) {
     if (rivalPokemon.type === "grass") {
@@ -55,8 +52,7 @@ class Fire extends Pokemon {
 
 class Grass extends Pokemon {
   constructor(name, hitPoints, attackDamage, move) {
-    super(name, hitPoints, attackDamage, move);
-    this.type = "grass";
+    super(name, hitPoints, attackDamage, move, "grass");
   }
   isEffectiveAgainst(rivalPokemon) {
     if (rivalPokemon.type === "water") {
@@ -74,8 +70,7 @@ class Grass extends Pokemon {
 
 class Water extends Pokemon {
   constructor(name, hitPoints, attackDamage, move) {
-    super(name, hitPoints, attackDamage, move);
-    this.type = "water";
+    super(name, hitPoints, attackDamage, move, "water");
   }
   isEffectiveAgainst(rivalPokemon) {
     if (rivalPokemon.type === "fire") {
@@ -93,46 +88,42 @@ class Water extends Pokemon {
 
 class Charmander extends Fire {
   constructor(hitPoints, attackDamage) {
-    super(hitPoints, attackDamage);
-    this.move = "ember";
-    this.name = "charmander";
+    super("charmander", hitPoints, attackDamage, "ember");
   }
 }
 
 class Squirtle extends Water {
   constructor(hitPoints, attackDamage) {
-    super(hitPoints, attackDamage);
-    this.move = "water gun";
-    this.name = "squirtle";
+    super("squirtle", hitPoints, attackDamage, "water gun");
   }
 }
 class Bulbasaur extends Grass {
   constructor(hitPoints, attackDamage) {
-    super(hitPoints, attackDamage);
-    this.move = "vine whip";
-    this.name = "bulbasaur";
+    super("bulbasaur", hitPoints, attackDamage, "vine whip");
   }
 }
 class Rattata extends Pokemon {
-  constructor(type, hitPoints, attackDamage) {
-    super(type, hitPoints, attackDamage);
-    this.name = "rattata";
+  constructor(hitPoints, attackDamage, move, type) {
+    super("rattata", hitPoints, attackDamage, move, type);
   }
 }
 
-const effectiveAgainst = {
-  fire: "grass",
-  grass: "water",
-  water: "fire",
-};
+class Pokeballs {
+  constructor(pokemon = {}) {
+    this.storage = pokemon;
+  }
 
-const weakAgainst = {
-  fire: "water",
-  grass: "fire",
-  water: "grass",
-};
+  throw(ourPokemon) {
+    if (this.quantity === 0) {
+    }
+  }
 
-const myPokemon = new Pokemon();
+  isEmpty() {
+    this.quantity = 0;
+  }
+
+  contains() {}
+}
 
 module.exports = {
   Pokemon,
@@ -143,4 +134,5 @@ module.exports = {
   Squirtle,
   Bulbasaur,
   Rattata,
+  Pokeballs,
 };
