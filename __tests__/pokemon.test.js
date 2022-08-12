@@ -7,7 +7,7 @@ const {
   Squirtle,
   Bulbasaur,
   Rattata,
-  Pokeballs,
+  Pokeball,
 } = require("../pokemon");
 
 describe("Pokemon", () => {
@@ -133,6 +133,16 @@ describe("Pokemon", () => {
 });
 describe("Pokeballs", () => {
   describe("Methods", () => {
-    test("throw method should return ", () => {});
+    describe("isEmpty", () => {
+    test('isEmpty method should return true if the storedPokemon is null', () => {
+      const testPokeball = new Pokeball()
+      expect(testPokeball.isEmpty()).toBe(true)
+    });
+    test('isEmpty method should return false if the storedPokemon is captured', () => {
+      const testPokeball = new Pokeball()
+      testPokeball.storedPokemon = new Pokemon("flareon", 65, 20, "fire blast", "fire");
+      expect(testPokeball.isEmpty()).toBe(false)
+    });
+  })
   });
 });

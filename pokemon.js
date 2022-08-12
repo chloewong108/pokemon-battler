@@ -108,21 +108,35 @@ class Rattata extends Pokemon {
   }
 }
 
-class Pokeballs {
-  constructor(pokemon = {}) {
-    this.storage = pokemon;
+class Pokeball {
+  constructor() {
+    this.storedPokemon = null
+
   }
 
   throw(ourPokemon) {
-    if (this.quantity === 0) {
-    }
+    if (this.isEmpty() === true) {
+      this.storedPokemon = ourPokemon
+    } else if(this.isEmpty() === true){
+      return `You caught ${this.name}!`
+    } 
+    
+    const message2 = `GO! ${this.name}!!`
   }
 
   isEmpty() {
-    this.quantity = 0;
+    if(this.storedPokemon === null){
+      return true
+    } 
+      return false 
   }
 
-  contains() {}
+  contains() {
+    if(this.quantity === 0) {
+      return 'empty...'
+    }
+    return this.storage
+  }
 }
 
 module.exports = {
@@ -134,5 +148,5 @@ module.exports = {
   Squirtle,
   Bulbasaur,
   Rattata,
-  Pokeballs,
+  Pokeball,
 };
